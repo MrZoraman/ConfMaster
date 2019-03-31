@@ -24,37 +24,37 @@ package com.lagopusempire.confmaster;
  * @author Foomf
  */
 public interface INode {
-        default RuntimeException Unsupported(String methodName) {
+    default RuntimeException Unsupported(String methodName) {
         return new UnsupportedOperationException("This is as " 
-                + GetType().toString().toLowerCase() + " node! Thus " 
+                + getType().toString().toLowerCase() + " node! Thus " 
                 + methodName + " is not supported.");
     }
 
-    NodeType GetType();
+    NodeType getType();
 
-    INode DeepClone();
+    INode deepClone();
 
-    default IListNode GetList(int index) {
+    default IListNode getList(int index) {
         throw Unsupported("GetList(int)");
     }
 
-    default IListNode GetList(String key) {
+    default IListNode getList(String key) {
         throw Unsupported("GetList(String)");
     }
 
-    default IObjectNode GetObject(int key) {
+    default IObjectNode getObject(int key) {
         throw Unsupported("GetObject(int)");
     }
 
-    default IObjectNode GetObject(String key) {
+    default IObjectNode getObject(String key) {
         throw Unsupported("GetObject(String)");
     }
 
-    default IValueNode GetValue(int key) {
+    default IValueNode getValue(int key) {
         throw Unsupported("GetValue(int)");
     }
 
-    default IValueNode GetValue(String key) {
+    default IValueNode getValue(String key) {
         throw Unsupported("GetValue(String)");
     }
 }
