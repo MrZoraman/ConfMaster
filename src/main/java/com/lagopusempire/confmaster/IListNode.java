@@ -23,6 +23,51 @@ package com.lagopusempire.confmaster;
  *
  * @author Foomf
  */
-public interface IListNode {
-    
+public interface IListNode extends INode {
+    @Override
+    default NodeType getType() {
+        return NodeType.LIST;
+    }
+
+    int length();
+
+    INode get(int index);
+
+    IListNode add(INode value) ;
+
+    IListNode add(byte value);
+
+    IListNode add(short value);
+
+    IListNode add(int value);
+
+    IListNode add(long value);
+
+    IListNode add(float value);
+
+    IListNode add(double value);
+
+    IListNode add(String value);
+
+    IListNode add(boolean value);
+
+    IListNode add(char value);
+
+    byte getByte(int index);
+
+    short getShort(int index);
+
+    int getInt(int index);
+
+    long getLong(int index);
+
+    float getFloat(int index);
+
+    double getDouble(int index);
+
+    boolean getBoolean(int index);
+
+    char getChar(int index);
+
+    String getString(int index);
 }
