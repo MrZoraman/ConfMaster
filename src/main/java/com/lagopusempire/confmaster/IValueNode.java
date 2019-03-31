@@ -23,6 +23,47 @@ package com.lagopusempire.confmaster;
  *
  * @author Foomf
  */
-public interface IValueNode {
-    
+public interface IValueNode extends INode {
+    @Override
+    default NodeType getType() {
+        return NodeType.VALUE;
+    }
+
+    Number getNumber();
+
+    void set(byte value);
+
+    void set(short value);
+
+    void set(int value);
+
+    void set(long value);
+
+    void set(float value);
+
+    void set(double value);
+
+    void set(String value);
+
+    void set(boolean value);
+
+    void set(char value);
+
+    byte byteValue();
+
+    short shortValue();
+
+    int intValue();
+
+    long longValue();
+
+    float floatValue();
+
+    double doubleValue();
+
+    boolean booleanValue();
+
+    char charValue();
+
+    String stringValue();
 }
