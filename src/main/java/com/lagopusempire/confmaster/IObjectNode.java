@@ -19,10 +19,80 @@
  */
 package com.lagopusempire.confmaster;
 
+import java.util.Deque;
+import java.util.Set;
+
 /**
  *
  * @author Foomf
  */
-public interface IObjectNode {
-    
+public interface IObjectNode extends INode {
+    @Override
+    default NodeType getType() {
+        return NodeType.OBJECT;
+    }
+
+    Set<String> keys();
+
+    INode get(String key);
+
+    ObjectNode resolve(Deque<String> paths);
+
+    IObjectNode resolve(String path);
+
+    IObjectNode unset(String key);
+
+    IObjectNode set(String key, INode value);
+
+    IObjectNode set(String key, byte value);
+
+    IObjectNode set(String key, short value);
+
+    IObjectNode set(String key, int value);
+
+    IObjectNode set(String key, long value);
+
+    IObjectNode set(String key, float value);
+
+    IObjectNode set(String key, double value);
+
+    IObjectNode set(String key, String value);
+
+    IObjectNode set(String key, boolean value);
+
+    IObjectNode set(String key, char value);
+
+    byte getByte(String key);
+
+    short getShort(String key);
+
+    int getInt(String key);
+
+    long getLong(String key);
+
+    float getFloat(String key);
+
+    double getDouble(String key);
+
+    boolean getBoolean(String key);
+
+    char getChar(String key);
+
+    String getString(String key);
+
+    byte resolveByte(String path);
+
+    short resolveShort(String path);
+
+    int resolveInt(String path);
+
+    long resolveLong(String path);
+
+    float resolveFloat(String path);
+
+    double resolveDouble(String path);
+
+    char resolveChar(String path);
+
+    String resolveString(String path);
 }
