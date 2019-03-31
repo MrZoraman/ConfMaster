@@ -19,6 +19,8 @@
  */
 package com.lagopusempire.confmaster;
 
+import com.lagopusempire.confmaster.serialization.IDeserializableObject;
+import com.lagopusempire.confmaster.serialization.IObjectDeserializer;
 import java.util.Deque;
 import java.util.Set;
 
@@ -43,6 +45,10 @@ public interface IObjectNode extends INode {
     IObjectNode unset(String key);
 
     IObjectNode set(String key, INode value);
+    
+    <T> T to(T instance, IObjectDeserializer<T> deserializer);
+
+    <T extends IDeserializableObject> T to(T instance);
 
     IObjectNode set(String key, byte value);
 

@@ -19,6 +19,8 @@
  */
 package com.lagopusempire.confmaster;
 
+import com.lagopusempire.confmaster.serialization.IObjectSerializer;
+import com.lagopusempire.confmaster.serialization.ISerializableObject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,6 +84,22 @@ public class ListNode implements IListNode {
     public IListNode add(INode value) {
         children.add(value);
         return this;
+    }
+    
+    static <T> ListNode from(Iterable<T> data, IObjectSerializer<T> serializer) {
+        ListNode node = new ListNode();
+        for(T datum : data) {
+            node.add(ObjectNode.from(datum, serializer));
+        }
+        return node;
+    }
+
+    static  ListNode from(Iterable<ISerializableObject> data) {
+        ListNode node = new ListNode();
+        for(ISerializableObject datum : data) {
+            node.add(ObjectNode.from(datum));
+        }
+        return node;
     }
 
     @Override

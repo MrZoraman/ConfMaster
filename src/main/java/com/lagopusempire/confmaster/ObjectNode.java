@@ -19,6 +19,10 @@
  */
 package com.lagopusempire.confmaster;
 
+import com.lagopusempire.confmaster.serialization.IDeserializableObject;
+import com.lagopusempire.confmaster.serialization.IObjectDeserializer;
+import com.lagopusempire.confmaster.serialization.IObjectSerializer;
+import com.lagopusempire.confmaster.serialization.ISerializableObject;
 import java.util.*;
 
 /**
@@ -108,6 +112,30 @@ public class ObjectNode implements IObjectNode {
 
         children.put(key, value);
         return this;
+    }
+    
+    static <T> ObjectNode from(T data, IObjectSerializer<T> serializer) {
+        ObjectNode node = new ObjectNode();
+        serializer.Serialize(node, data);
+        return node;
+    }
+
+    static ObjectNode from(ISerializableObject data) {
+        ObjectNode node = new ObjectNode();
+        data.Serialize(node);
+        return node;
+    }
+    
+    @Override
+    public <T> T to(T instance, IObjectDeserializer<T> deserializer) {
+        deserializer.Deserialize(instance, this);
+        return instance;
+    }
+
+    @Override
+    public <T extends IDeserializableObject> T to(T instance) {
+        instance.Deserialize(this);
+        return instance;
     }
 
     @Override
