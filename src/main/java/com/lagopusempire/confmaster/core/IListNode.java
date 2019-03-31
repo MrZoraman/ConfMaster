@@ -17,44 +17,57 @@
  *    misrepresented as being the original software.
  * 3. This notice may not be removed or altered from any source distribution.
  */
-package com.lagopusempire.confmaster;
+package com.lagopusempire.confmaster.core;
 
 /**
  *
  * @author Foomf
  */
-public interface INode {
-    default RuntimeException Unsupported(String methodName) {
-        return new UnsupportedOperationException("This is as " 
-                + getType().toString().toLowerCase() + " node! Thus " 
-                + methodName + " is not supported.");
+public interface IListNode extends INode {
+    @Override
+    default NodeType getType() {
+        return NodeType.LIST;
     }
 
-    NodeType getType();
+    int length();
 
-    INode deepClone();
+    INode get(int index);
 
-    default IListNode getList(int index) {
-        throw Unsupported("GetList(int)");
-    }
+    IListNode add(INode value) ;
 
-    default IListNode getList(String key) {
-        throw Unsupported("GetList(String)");
-    }
+    IListNode add(byte value);
 
-    default IObjectNode getObject(int key) {
-        throw Unsupported("GetObject(int)");
-    }
+    IListNode add(short value);
 
-    default IObjectNode getObject(String key) {
-        throw Unsupported("GetObject(String)");
-    }
+    IListNode add(int value);
 
-    default IValueNode getValue(int key) {
-        throw Unsupported("GetValue(int)");
-    }
+    IListNode add(long value);
 
-    default IValueNode getValue(String key) {
-        throw Unsupported("GetValue(String)");
-    }
+    IListNode add(float value);
+
+    IListNode add(double value);
+
+    IListNode add(String value);
+
+    IListNode add(boolean value);
+
+    IListNode add(char value);
+
+    byte getByte(int index);
+
+    short getShort(int index);
+
+    int getInt(int index);
+
+    long getLong(int index);
+
+    float getFloat(int index);
+
+    double getDouble(int index);
+
+    boolean getBoolean(int index);
+
+    char getChar(int index);
+
+    String getString(int index);
 }

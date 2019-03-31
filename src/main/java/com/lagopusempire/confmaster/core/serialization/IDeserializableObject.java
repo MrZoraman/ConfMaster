@@ -17,14 +17,15 @@
  *    misrepresented as being the original software.
  * 3. This notice may not be removed or altered from any source distribution.
  */
-package com.lagopusempire.confmaster.serialization;
+package com.lagopusempire.confmaster.core.serialization;
 
-import com.lagopusempire.confmaster.IObjectNode;
+import com.lagopusempire.confmaster.core.IObjectNode;
 
 /**
  *
  * @author Foomf
  */
-public interface IObjectDeserializer<T> {
-    T Deserialize(T instance, IObjectNode node);
+@FunctionalInterface
+public interface IDeserializableObject {
+    void Deserialize(IObjectNode node);
 }

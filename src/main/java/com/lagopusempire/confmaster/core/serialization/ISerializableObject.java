@@ -17,14 +17,15 @@
  *    misrepresented as being the original software.
  * 3. This notice may not be removed or altered from any source distribution.
  */
-package com.lagopusempire.confmaster;
+package com.lagopusempire.confmaster.core.serialization;
+
+import com.lagopusempire.confmaster.core.IObjectNode;
 
 /**
  *
  * @author Foomf
  */
-public enum NodeType {
-    VALUE,
-    OBJECT,
-    LIST
+@FunctionalInterface
+public interface ISerializableObject {
+    void Serialize(IObjectNode node);
 }

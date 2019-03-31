@@ -17,12 +17,12 @@
  *    misrepresented as being the original software.
  * 3. This notice may not be removed or altered from any source distribution.
  */
-package com.lagopusempire.confmaster;
+package com.lagopusempire.confmaster.core;
 
-import com.lagopusempire.confmaster.serialization.IDeserializableObject;
-import com.lagopusempire.confmaster.serialization.IObjectDeserializer;
-import com.lagopusempire.confmaster.serialization.IObjectSerializer;
-import com.lagopusempire.confmaster.serialization.ISerializableObject;
+import com.lagopusempire.confmaster.core.serialization.IDeserializableObject;
+import com.lagopusempire.confmaster.core.serialization.IObjectDeserializer;
+import com.lagopusempire.confmaster.core.serialization.IObjectSerializer;
+import com.lagopusempire.confmaster.core.serialization.ISerializableObject;
 import java.util.*;
 
 /**
