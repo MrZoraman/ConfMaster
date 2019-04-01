@@ -26,6 +26,7 @@ import com.lagopusempire.confmaster.core.ListNode;
 import com.lagopusempire.confmaster.core.ObjectNode;
 import com.lagopusempire.confmaster.core.ValueNode;
 import com.lagopusempire.confmaster.core.serialization.IDeserializableObject;
+import com.lagopusempire.confmaster.core.serialization.IObjectDeserializer;
 import com.lagopusempire.confmaster.core.serialization.IObjectSerializer;
 import com.lagopusempire.confmaster.core.serialization.ISerializableObject;
 import java.util.Set;
@@ -315,7 +316,7 @@ public class Demo {
         root.set(
                 "level1", new ObjectNode().set(
                         "level2", new ObjectNode().set(
-                                "Level3", new ValueNode(33))));
+                                "level3", new ValueNode(33))));
         // This is the equivalent to this yaml document:
         // level1:
         //   level2:
@@ -359,15 +360,32 @@ public class Demo {
         // internal data model, and then serialize it back using your new
         // schema. I can show a very simple example here:
         
-        MyFoo foo = new MyFoo(5, "test");
-        
-        IObjectSerializer<MyFoo> schema1Serializer = (node, f) -> {
-            node.set("schema1_value", f.SomeValue);
-            node.set("schema1_string", f.SomeString);
+        // old schema. This supposed schema audit feature would tell us that
+        // schema_1_Serializer is the right one to use.
+        IObjectDeserializer<MyFoo> schema_1_Deserializer = (f, node) -> {
+            f.SomeValue = node.getInt("schema1_val");
+            f.SomeString = node.getString("schema1_str");
+            return f;
         };
         
-        IObjectNode n = ObjectNode.from(foo, schema1Serializer);
+        // This is our new data model/schema. Note the different names for
+        // the keys.
+        IObjectSerializer<MyFoo> schema_2_Serializer = (node, f) -> {
+            node.set("schema2_value", f.SomeValue);
+            node.set("schema2_string", f.SomeString);
+        };
         
-        // foo is our internal data model. This supposed schema audit fea
+        root = new ObjectNode() // read old data from yaml or wherever
+                .set("schema1_val", 5)
+                .set("schema1_str", "test");
+        MyFoo foo = root.to(new MyFoo(), schema_1_Deserializer);
+        
+        // Serialize back to a Confmaster node instance
+        IObjectNode node = ObjectNode.from(foo, schema_2_Serializer);
+        
+        // Node can now be written using whatever backend (yaml, etc). The
+        // schema conversion is complete.
+        assert(node.getInt("schema2_value") == 5);
+        assert(node.getString("schema2_string").equals("test"));
     }
 }
