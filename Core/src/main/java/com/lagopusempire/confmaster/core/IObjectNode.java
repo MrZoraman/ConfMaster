@@ -85,6 +85,8 @@ public interface IObjectNode extends INode {
     char getChar(String key);
 
     String getString(String key);
+    
+    IListNode resolveList(String path);
 
     byte resolveByte(String path);
 

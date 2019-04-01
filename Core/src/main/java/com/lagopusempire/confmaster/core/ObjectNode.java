@@ -227,6 +227,15 @@ public class ObjectNode implements IObjectNode {
     public String getString(String key) {
         return getValue(key).stringValue();
     }
+    
+    @Override
+    public IListNode resolveList(String path) {
+        String[] parts = path.split("\\.");
+        Deque<String> list = new LinkedList<>(Arrays.asList(parts));
+        String key = list.removeLast();
+        IObjectNode node = resolve(list);
+        return node.getList(key);
+    }
 
     @Override
     public byte resolveByte(String path) {
