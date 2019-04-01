@@ -114,13 +114,13 @@ public class ObjectNode implements IObjectNode {
         return this;
     }
     
-    static <T> ObjectNode from(T data, IObjectSerializer<T> serializer) {
+    public static <T> ObjectNode from(T data, IObjectSerializer<T> serializer) {
         ObjectNode node = new ObjectNode();
         serializer.Serialize(node, data);
         return node;
     }
 
-    static ObjectNode from(ISerializableObject data) {
+    public static ObjectNode from(ISerializableObject data) {
         ObjectNode node = new ObjectNode();
         data.Serialize(node);
         return node;

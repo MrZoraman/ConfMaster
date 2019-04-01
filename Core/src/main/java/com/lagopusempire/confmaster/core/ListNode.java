@@ -86,7 +86,7 @@ public class ListNode implements IListNode {
         return this;
     }
     
-    static <T> ListNode from(Iterable<T> data, IObjectSerializer<T> serializer) {
+    public static <T> ListNode from(Iterable<T> data, IObjectSerializer<T> serializer) {
         ListNode node = new ListNode();
         for(T datum : data) {
             node.add(ObjectNode.from(datum, serializer));
@@ -94,7 +94,7 @@ public class ListNode implements IListNode {
         return node;
     }
 
-    static  ListNode from(Iterable<ISerializableObject> data) {
+    public static  ListNode from(Iterable<ISerializableObject> data) {
         ListNode node = new ListNode();
         for(ISerializableObject datum : data) {
             node.add(ObjectNode.from(datum));
